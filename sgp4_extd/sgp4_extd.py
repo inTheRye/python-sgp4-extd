@@ -474,11 +474,9 @@ class SpaceObjects(object):
         # index 0: (method='d', isimp=1) (Deep Space）
         # index 1: (method='n', isimp=0) (SGP4)
         # index 2: (method='n', isimp=1) (SGP4: perigee altitude less than 220 km)
-        with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
-            writer = tf.summary.FileWriter("./log", sess.graph)
+        with tf.Session() as sess:
             r0, r1, r2 = sess.run(r)
             v0, v1, v2 = sess.run(v)
-            writer.close()
 
         position = np.hstack([r0, r1, r2])
         velocity = np.hstack([v0, v1, v2])
