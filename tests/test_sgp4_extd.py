@@ -97,7 +97,7 @@ def generate_satellite_output(tle_list, line2, whichconst, satnum):
     """Print a data line for each time in line2's start/stop/step field.
     """
     tstart, tend, tstep = (float(field) for field in line2[69:].split())
-    print(satnum)
+    print("Test for catalog No. {}".format(satnum))
 
     so = SpaceObjects(tle_list, whichconst, tstart, tend, tstep, julian_date=True)
     df = so.propagate()
