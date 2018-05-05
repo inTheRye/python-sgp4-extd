@@ -13,7 +13,7 @@ setup(
     name='sgp4_extd',
     version='0.1',
     description='The pararell sgp4 for analytical propagation of space objects.',
-    url='https://github.com/inTheRye/python-sgp4-extd,
+    url='https://github.com/inTheRye/python-sgp4-extd',
     author='Takaaki Tanaka',
     author_email='selene.pace.ima@gmail.com',
     license='MIT',
