@@ -5,7 +5,7 @@ from unittest import TestCase, main
 import os
 
 from sgp4.earth_gravity import wgs72
-from sgp4_extd import SpaceObjects
+from sgp4_extd.sgp4_extd import SpaceObjects
 from sgp4 import io
 import numpy as np
 
