@@ -2,13 +2,11 @@
 # coding: utf-8
 import tensorflow as tf
 from concurrent.futures import ThreadPoolExecutor
-from sgp4.earth_gravity import wgs84
 from sgp4.io import twoline2rv
 from sgp4.ext import jday
 import datetime
 from operator import attrgetter
 import math
-import time
 import numpy as np
 import pandas as pd
 import copy
