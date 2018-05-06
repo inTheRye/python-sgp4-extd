@@ -22,7 +22,8 @@ class SpaceObjects(object):
         split_list (list of int):Categorized number according to orbital characteristics.
     """
 
-    def __init__(self, tle_list, whichconst, start_epoch, propagate_range, delta_t=60, julian_date=False):
+    def __init__(self, tle_list, whichconst, start_epoch, propagate_range, delta_t=60, julian_date=False,
+                 tf_config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=False)):
         self.satrecs = self.read_twolinelist(tle_list, whichconst)
         self.date_list, self.jdays = self.__make_jday_list(start_epoch, propagate_range, delta_t, julian_date)
         #  ------------------ make tensor split_list -------------------
@@ -30,6 +31,8 @@ class SpaceObjects(object):
         num_of_normal = len([satrec for satrec in self.satrecs if satrec.isimp == 0])
         num_of_under220km = len([satrec for satrec in self.satrecs if satrec.method == 'n' and satrec.isimp == 1])
         self.split_list = [num_of_deepspace, num_of_normal, num_of_under220km]
+        self.tf_config=tf_config
+
 
     def __make_plenty_of_tensor_lists(self, *args):
         """Wrapper for __make_tensor_list().
@@ -472,7 +475,7 @@ class SpaceObjects(object):
         # index 0: (method='d', isimp=1) (Deep Space）
         # index 1: (method='n', isimp=0) (SGP4)
         # index 2: (method='n', isimp=1) (SGP4: perigee altitude less than 220 km)
-        with tf.Session() as sess:
+        with tf.Session(config=self.tf_config) as sess:
             r0, r1, r2 = sess.run(r)
             v0, v1, v2 = sess.run(v)
 
